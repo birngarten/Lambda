@@ -35,6 +35,9 @@ public class Stream01Integer {
         // Metod Referansi ile 9'dan buyuk sayilari yazdir?
         list.stream().filter(t -> t > 9).forEach( Stream01Integer :: yazdir ); // 11 11 12 17 16 17
         //                                            ClassAdi  :: methodAdi
+
+        System.out.println("\n=====Cift Sayilar(Method)======");
+        ciftleriYazdir(list);
     }
 
     public static boolean tekMi(int num){
@@ -48,4 +51,22 @@ public class Stream01Integer {
     public static void yazdir(int num){
         System.out.print(num + " ");
     }
+
+    public static void ciftleriYazdir(List<Integer> list){
+//        list.stream().filter(x -> x % 2== 0).forEach(x-> System.out.print(x + " "));
+
+    }
 }
+
+
+
+//Stream api de pupeline de islemler lazy'dir.
+//Cunku arkadan gelecek islemlerin durumu degisebileceginden dolayi.
+//Terminal islemleri eager'dir.Yazilmazsa calismaz
+//Stream kaynagi:collection,List,Set,Array,File...
+//Ara islemler:Filter()(filtrele)->basta olmali,map()(guncelle),sorted()(sirala),findfirst(ilkeleman)
+//             skip(ilk 5 elamani alma gibi-atlama),dintinc()t(tekrarsiz urun),
+//             limit(sinirlama),flatMap(birden fazla coll birlestirir)
+//Terminal islemleri:forEach(yazdirir),reduce()(kendi term islemi yapabiliriz ama lambda ifadesi),
+//                   collect()(olusturulan degerleri yeni coll yapmak icin;Bir listeye saklamak icin),
+//                   //max()(verinin max),min()(min deger),count()(kac tane o veriden var)
