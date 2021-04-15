@@ -32,7 +32,11 @@ class Stream02Integer {
     public static Optional<Integer> tekKupToplami(List<Integer> l){
 //      int toplam =  l.stream().filter(Stream01Integer::tekMi).map(t-> t*t*t).reduce(0,(x,y) -> (x+y));
 //        return toplam;
+
         return l.stream().filter(Stream01Integer::tekMi).map(t-> t*t*t).reduce(Math::addExact); // Optional[7030]
 //        return l.stream().filter(Stream01Integer::tekMi).map(t-> t*t*t).reduce(Integer::sum); // Optional[7030]
+
     }
+
+
 }
