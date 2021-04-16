@@ -17,26 +17,31 @@ class Stream02Integer {
         liste.add(4);
         liste.add(12);
         liste.add(15);
-
+        liste.add(500);
         tekKareYazdir(liste);
-
-        System.out.println("\ntekKupToplami = " + tekKupToplami(liste));
+        System.out.println("\nTOPLAM:" + tekKupToplami(liste));
     }
 
-    // tek sayilarin karesini donduren bir method yaziniz?
-    public static void tekKareYazdir(List<Integer> l){
-        l.stream().distinct().filter(Stream01Integer::tekMi).map(t -> t*t).forEach(Stream01Integer::yazdir);
+    //**************************************************************************************
+    // ORNEK5: Bir listedeki tek sayıların karelerini yazdıran bir metot tanımlayınız.
+    //**************************************************************************************
+    // map() metodu collection üzerinde bir transformation işlemi sağlayan ara işlem metodudur.
+    // Eğer bir collectionın verilerininin değişik hallerini hesaplama istersek map() kullanabiliriz.
+    public static void tekKareYazdir(List <Integer> l){
+        l.stream().distinct().filter(Stream01Integer::tekMi).map(x->x*x).forEach(Stream01Integer::yazdir);
     }
 
-    // tek sayilarin kuplerinin toplamini return eden bir method yazin
-    public static Optional<Integer> tekKupToplami(List<Integer> l){
-//      int toplam =  l.stream().filter(Stream01Integer::tekMi).map(t-> t*t*t).reduce(0,(x,y) -> (x+y));
-//        return toplam;
-
-        return l.stream().filter(Stream01Integer::tekMi).map(t-> t*t*t).reduce(Math::addExact); // Optional[7030]
-//        return l.stream().filter(Stream01Integer::tekMi).map(t-> t*t*t).reduce(Integer::sum); // Optional[7030]
+    //**************************************************************************************
+    // ORNEK6: Bir listedeki tek sayıların küplerinin toplamını hesaplayarak
+    // döndüren bir metot tanımlayınız.
+    //**************************************************************************************
+    // reduce() bir terminal işlemidir. Stream hattını kapatır ve tek bir sonuç üretir.
+    // Collection'ı indirgeme işlemini lambda fonksiyonu veya metot refransı ile yapabiliriz.
+    public static Integer tekKupToplami(List <Integer> l){
+        //  return l.stream().filter(Stream01Integer::tekMi).map(x->x*x*x).reduce(0,(x,y)-> (x+y));
+        //  return l.stream().filter(Stream01Integer::tekMi).map(x->x*x*x).reduce(Math::addExact);
+        return l.stream().filter(Stream01Integer::tekMi).map(x->x*x*x).reduce(0, Integer::sum);
 
     }
-
 
 }

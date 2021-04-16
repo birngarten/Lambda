@@ -15,23 +15,77 @@ public class Stream04String {
         liste.add("Tucker");
         liste.add("Christ");
 
-        aHarfiyleBaslayanlar(liste);
-        System.out.println("\n");
+        aIleBaslayanlar(liste);
+        System.out.println("===========");
         buyukHarfeCevir(liste);
+        System.out.println("===========");
+        uzunlugunaGoreYazKucukHarfeCevir(liste);
+        System.out.println("===========");
+        uzunlugaGoreYazdir(liste,5);
+        System.out.println("===========");
+        System.out.println("Tum degerler verilen degerden kucuk = " + uzunlukKucukMu(liste,8)); // true
+        System.out.println("baslamayanHarfVarMi(liste,\"B\") = " + baslamayanHarfVarMi(liste,"B")); // true
+        System.out.println("belirtilenHarfleBitenVarMi() = " + belirtilenHarfleBitenVarMi(liste,"r")); //true
+
     }
 
-    // Listedeki bas harfi A ile baslayan isimleri yazdiran metodu tanimlayalim...
-    public static void aHarfiyleBaslayanlar(List<String> l){
-        l.stream().
-                filter(t -> t.startsWith("A")). // 2.Yol (t -> t.charAt(0)=='A')
-                forEach(System.out::println);
+    //********************************************************************************************
+    // ORNEK16: Listedeki baş harfi A ile başlayan isimleri yazdıran metodu tanımlayalım..
+    //********************************************************************************************
+    public static void aIleBaslayanlar(List<String> liste){
+        liste.stream().filter(h-> h.startsWith("A")).forEach(System.out::println);
     }
 
-    // Tum isimleri BUYUK harfe cevirerek yazdiriniz
+    //********************************************************************************************
+    // ORNEK17: Listedeki tüm isimleri büyük harfe çeviren metodu tanımlayalım..
+    //********************************************************************************************
     public static void buyukHarfeCevir(List<String> liste){
-        liste.
-              stream().
-              map(t -> t.toUpperCase()).
-              forEach(System.out::println);
+        liste.stream().map(h-> h.toUpperCase()).forEach(System.out::println);
     }
+
+    //********************************************************************************************
+    // ORNEK18: Listedeki tüm elemanlari uzunluklarina gore siralayan ve kucuk harfe çeviren metodu tanımlayalım..
+    // *** Comparator.comparing()
+    //********************************************************************************************
+    public static void uzunlugunaGoreYazKucukHarfeCevir(List<String> liste){
+        liste.stream().
+                sorted(Comparator.comparing(t-> t.length())).
+                map(t-> t.toLowerCase()).forEach(System.out::println);
+    }
+
+    //********************************************************************************************
+    // ORNEK19: Listedeki tüm elemanlarin uzunluklari belirtilen uzunluktan fazla ise
+    // bunlari yazdiran metodu tanımlayalım..
+    //********************************************************************************************
+    public static void uzunlugaGoreYazdir(List<String> liste, int uzunluk){
+        liste.stream().filter(t->t.length() > uzunluk).forEach(System.out::println);
+    }
+
+    //********************************************************************************************
+    // ORNEK20: Listedeki tüm elemanlarin uzunluklari belirtilen uzunluktan KUCUK mu diye
+    // kontrol eden metodu tanımlayalım..
+    // *** allMatch() : Belirtilen sartlari tum elemanlar sagliyorsa true, yoksa false dondurur
+    //********************************************************************************************
+    public static boolean uzunlukKucukMu(List<String> liste, int uzunluk){
+        return liste.stream().allMatch(t-> t.length()<uzunluk);
+    }
+
+    //********************************************************************************************
+    // ORNEK21: Listedeki TUM elemanlarin belirtilen harf ile baslayip baslamadigini 
+    // kontrol eden metodu tanımlayalım..
+    // *** noneMatch() : Belirtilen sartlari tum elemanlar SAGLAMIYORSA true, yoksa false dondurur
+    //********************************************************************************************
+    public static boolean baslamayanHarfVarMi(List<String> liste, String harf){
+        return liste.stream().noneMatch(t-> t.startsWith(harf));
+    }
+
+    //********************************************************************************************
+    // ORNEK22: Listede belirtile eleman verilen harfle biten var mi diye kontrol eden metodu tanımlayalım..
+    // *** anyMatch() : Belirtilen sartlari TEK eleman bile SAGLIYORSA true, yoksa false dondurur
+    //********************************************************************************************
+    public static boolean belirtilenHarfleBitenVarMi(List<String> liste, String harf){
+        return liste.stream().anyMatch(t-> t.endsWith(harf));
+    }
+
+
 }
