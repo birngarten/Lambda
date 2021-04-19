@@ -13,51 +13,46 @@ import java.util.List;
 // Javada genelde bu gibi fonksiyonlar üzerinden Lambda ifadeleri kullanılmaktadır.
 
 public class Lambda01Kurallar {
-
     public static void main(String[] args) {
 
-        List<Integer> list = Arrays.asList(1,2,3,4,5);
+        List<Integer> liste = Arrays.asList(1,2,3,4,5);
 
-        // forEach() bir collection'nin iterasyonu icin kullanilan bir HOF'tur.
-        // parametre olarak bir lambda fonksiyonu alabilir
+        // forEach() bir collection'nın iterasyonu için kullanılan HOF'dur.
+        // Parametre olarak bir lambda fonksiyonu alabilir.
 
-        // Dizinin Elemanlarini yazdiralim
-        list.forEach(i -> System.out.print(i + " ")); // 1 2 3 4 5
+        // Dizinin Elemanlarını yazdıralım
+        System.out.println("=== Dizinin Elamanlarını Yazdır ===");
+        liste.forEach((x) ->System.out.print(x));
 
-        System.out.println("\n===========");
+        //Listenin elemanlarını 2 arttırarak yazdıralım.
+        System.out.println("\n == Dizinin Elamanlarını 2 arttırarak Yazdır ==");
+        liste.forEach(t-> System.out.print(t+2 + " "));
 
-        // Listenin elemanlarini 2 artirarak yazdirralim.
-        list.forEach(t -> System.out.print(t+2 + " ")); // 3 4 5 6 7
-
-        System.out.println("\n Eger satir sayisi 1'den fazla ise {} kullanmaliyiz...");
-        list.forEach(t -> {
+        System.out.println("\n=== Eğer satır sayısı 1'den fazla ise {} kullanmalıyız..=== ");
+        liste.forEach(t-> {
             int miktar = 2;
-            System.out.print(t + miktar + " \n");
+            System.out.print(t + miktar + " ");
         });
 
-        // Veri tipi kullanilirsa Explicit
-        list.forEach((Integer x) -> System.out.print(x*2 + " ")); // 2 4 6 8 10
+        System.out.println("\n === Veri tipi kullanılırsa : Explicit ==");
+        System.out.println("Dizinin Elemanlarının 2 katını yazdır.");
+        liste.forEach((Integer x) -> System.out.print(x*2 + " "));
 
-        // Bir dis degisken kullanalim!!
-        System.out.println("\nBir dis degisken kullanalim!!");
+        System.out.println("\nLambda ifadesinde dış değişkenler kullanalıbilir");
+        System.out.println("Ancak bu değişken Final gibi davranır.");
+        int deger= 6;
+        liste.forEach(t-> System.out.println(t+deger));
 
-        int deger = 5;
-        list.forEach(t -> System.out.print(t+deger + " ")); // 6 7 8 9 10
+        // Metot Refransı =====> Class adı :: Metot adı
+        System.out.println("\nJavanın Method referansını kullanabiliriz");
+        liste.forEach(System.out::print);
 
-        // *** METHOD REFERANSI ***
-        // Metod Referansi ile yazma ====> Class adi :: MethodAdi
-        System.out.println("\nMethod referansi ile yazdirma !!!");
-        list.forEach(System.out::print); // 12345
-
-        // Class adi :: MethodAdi
-        System.out.println("\nMethod referansi ile yazdirma !!!");
-        list.forEach(Lambda01Kurallar::yazdir); // 1 2 3 4 5
-                    //   Class adi   :: MethodAdi
+        // Metot Referansı =====> Class adı :: Metot adı
+        System.out.println("\nKendimizin yazdığı metotları da Method referansı olarak kullanabiliriz");
+        liste.forEach(Lambda01Kurallar::yazdır);
     }
-
-    public static void yazdir(int x){
+    // int değer yazdıran metot
+    public static void yazdır(int x){
         System.out.print(x + " ");
-
     }
-
 }

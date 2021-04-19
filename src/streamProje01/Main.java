@@ -11,7 +11,9 @@ public class Main {
         testOgrenciOlustur();
         ismeGoreListele("ayse");
         ismeGoreListele("ahmet");
-
+        String [] a = {"Mer","carla","cur"};
+        System.out.println(a.length);
+        System.out.println(a[1].length());
 
     }
 
