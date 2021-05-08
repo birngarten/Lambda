@@ -80,6 +80,5 @@ public class Stream06Files {
                                 count();
         System.out.println(charactersCount);
 
-
     }
 }
